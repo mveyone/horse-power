@@ -1,0 +1,27 @@
+---
+- name: "Build container with ansible"
+  hosts: localhost
+  tasks:
+  - name: stop running container
+    command: docker stop power-horse
+    ignore_errors: yes
+  
+  - name: delete ran container
+    command: docker rm -f power-horse
+    ignore_errors: yes
+
+  - name: delete power-horse image
+    command: docker rmi power-horse
+    ignore_errors: yes 
+
+  - name: rebuilding power-horse image;
+    command: docker build -t power-horse . 
+    
+  - name: rebuilding power-horse image;
+    command: docker build -t power-horse .  
+
+  - name: re-run power-horse cobtainer;
+    command: docker run-d --name power-horse -p 9090:80 power-horse   
+
+  - name: pushing power-horse image to dockerhub;
+    command: docker push mveyone/power-horse:latest  
