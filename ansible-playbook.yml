@@ -14,14 +14,11 @@
     command: docker rmi power-horse
     ignore_errors: yes 
 
-  - name: rebuilding power-horse image;
+  - name: rebuilding power-horse image
     command: docker build -t power-horse . 
-    
-  - name: rebuilding power-horse image;
-    command: docker build -t power-horse .  
 
-  - name: re-run power-horse cobtainer;
-    command: docker run-d --name power-horse -p 9090:80 power-horse   
+  - name: re-run power-horse cobtainer
+    command: docker run -d --name power-horse -p 9090:80 power-horse   
 
-  - name: pushing power-horse image to dockerhub;
-    command: docker push mveyone/power-horse:latest  
+  - name: pushing power-horse image to dockerhub
+    command: docker push mveyone/power-horse:latest    
