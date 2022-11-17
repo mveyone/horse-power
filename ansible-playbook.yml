@@ -20,5 +20,8 @@
   - name: re-run power-horse cobtainer
     command: docker run -d --name power-horse -p 9090:80 power-horse   
 
+  - name: changing tag of current image
+    command: docker tag power-horse mveyone/power-horse:latest
+
   - name: pushing power-horse image to dockerhub
     command: docker push mveyone/power-horse:latest    
