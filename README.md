@@ -159,3 +159,59 @@ Step 12:
 Once the job run successfully:
 
 Go to your browser: PUBLIC_IPv4_ADDRESS:5000
+
+
+----------------------------------------
+###################################################
+#
+#
+#// This Jenkinsfile is to login with Docker Credentials and run ansible playbook file that will run docker commands to build image, run container and push image to dockerhub  
+
+//Pipeline start here
+pipeline {
+    agent any
+
+//Add Dockerhub Credentials
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
+  //Pipeline stages
+    stages {
+      // First Stage
+        stage('First-Stage') {
+          // Steps in first stage
+            steps {
+              // Command to login using dockerhub credentials  
+              sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Second-Stage') {
+            steps {
+              // Run mutliple commands
+              sh """
+              cd ${APPLICATION_DIR}
+              ansible-playbook playbook.yml
+              """
+            }
+        }
+    }
+}
+
+
+My first solutions was:
+
+usermod -aG docker jenkins
+usermod -aG root jenkins
+chmod 664 /var/run/docker.sock
+
+But none of them work for me, I tried:
+
+chmod 777 /var/run/docker.sock
+
+That works, but I don't know if it is the right call.
+
+
+
+i used a pipeline with git and jenkins file a
+ now i will try to use a freestyle pipeline
+#
