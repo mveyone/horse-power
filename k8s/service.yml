@@ -11,5 +11,6 @@ spec:
 # ClusterIP (default), LoadBalancer (works on cloud), NodePort (most used)
   type: NodePort
   ports:
-  - port: 9090 
+  - protocol: TCP
+    port: 9090 
     targetPort: 9090
