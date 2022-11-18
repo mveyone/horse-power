@@ -1,0 +1,22 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: power-horse-deployement-img 
+  namespace: power-horse
+  labels:
+    app: power-horse
+spec:
+  selector:
+    matchLabels:
+      app: power-horse
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: power-horse
+    spec:
+      containers:
+      - name: power-horse
+        image: power-horse
+        ports:
+        - containerPort: 9090
